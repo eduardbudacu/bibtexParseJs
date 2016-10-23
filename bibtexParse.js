@@ -235,7 +235,17 @@
                 }
                 ;
                 kv = this.key_equals_value();
-                this.currentEntry['entryTags'][kv[0]] = kv[1];
+                if(this.currentEntry['entryTags'][kv[0]] != undefined) {
+					if(this.currentEntry['entryTags'][kv[0]] instanceof Array) {
+						this.currentEntry['entryTags'][kv[0]].push(kv[1]);
+					} else {
+						this.currentEntry['entryTags'][kv[0]] = [this.currentEntry['entryTags'][kv[0]]];
+						this.currentEntry['entryTags'][kv[0]].push(kv[1]);
+					}
+				}
+                else {
+					this.currentEntry['entryTags'][kv[0]] = kv[1];
+				}
             };
         };
 
